@@ -1,14 +1,14 @@
-import type { LoaderArgs } from '@remix-run/node';
-import { defer } from '@remix-run/node';
-import { Await, useLoaderData } from '@remix-run/react';
-import { Suspense } from 'react';
-import { sleep } from '~/utils';
+import type { LoaderArgs } from "@remix-run/node";
+import { defer } from "@remix-run/node";
+import { Await, useLoaderData } from "@remix-run/react";
+import { Suspense } from "react";
+import { sleep } from "~/utils";
 
 const getPeopleDelayTime = 3000;
 const getPeople = async () => {
   await sleep(getPeopleDelayTime);
 
-  return [{ name: 'adam' }, { name: 'ben' }];
+  return [{ name: "adam" }, { name: "ben" }];
 };
 
 export async function loader({ request }: LoaderArgs) {
@@ -23,9 +23,9 @@ export default function Page() {
   const data = useLoaderData<typeof loader>();
 
   return (
-    <div style={{ fontFamily: 'system-ui, sans-serif', lineHeight: '1.4' }}>
+    <div style={{ fontFamily: "system-ui, sans-serif", lineHeight: "1.4" }}>
       <h1>
-        Welcome to Remix{' '}
+        Welcome to Remix{" "}
         <span style={{ fontSize: 20 }}>
           (This page was rendered via SSR streaming)
         </span>

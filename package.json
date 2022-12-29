@@ -7,6 +7,7 @@
     "start": "remix-serve build"
   },
   "dependencies": {
+    "@byted-tiktok/tux-components": "^5.10.2",
     "@remix-run/node": "deferred",
     "@remix-run/react": "deferred",
     "@remix-run/serve": "deferred",

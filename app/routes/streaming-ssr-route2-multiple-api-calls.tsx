@@ -1,20 +1,20 @@
-import type { LoaderArgs } from '@remix-run/node';
-import { defer } from '@remix-run/node';
-import { Await, useLoaderData } from '@remix-run/react';
-import { Suspense } from 'react';
-import { sleep } from '~/utils';
+import type { LoaderArgs } from "@remix-run/node";
+import { defer } from "@remix-run/node";
+import { Await, useLoaderData } from "@remix-run/react";
+import { Suspense } from "react";
+import { sleep } from "~/utils";
 
 const getPeopleStreamingDelay = 3000;
 const getProjectsDelay = 500; // TODO example of where one takes 100ms (that will be the delay3)
 
 const getPeople = async () => {
   await sleep(getPeopleStreamingDelay);
-  return [{ name: 'adam' }, { name: 'ben' }];
+  return [{ name: "adam" }, { name: "ben" }];
 };
 
 const getProjects = async () => {
   // await sleep(getProjectsDelay);
-  return [{ name: 'Build Shed' }, { name: 'Build Gaming Computer' }];
+  return [{ name: "Build Shed" }, { name: "Build Gaming Computer" }];
 };
 
 export async function loader({ request }: LoaderArgs) {
@@ -43,9 +43,9 @@ export default function Page() {
   const data = useLoaderData<typeof loader>();
 
   return (
-    <div style={{ fontFamily: 'system-ui, sans-serif', lineHeight: '1.4' }}>
+    <div style={{ fontFamily: "system-ui, sans-serif", lineHeight: "1.4" }}>
       <h1>
-        Welcome to Remix{' '}
+        Welcome to Remix{" "}
         <span style={{ fontSize: 20 }}>
           (This page was rendered via SSR streaming)
         </span>
@@ -65,16 +65,19 @@ export default function Page() {
         }
       >
         <Await resolve={data.people} errorElement={<div>Error</div>}>
-          {(people) => (
-            <>
-              <h2>People</h2>
-              <ul>
-                {people.map((person, i) => (
-                  <li key={i}>{person.name}</li>
-                ))}
-              </ul>
-            </>
-          )}
+          {(people) => {
+            console.log("render render");
+            return (
+              <>
+                <h2>People</h2>
+                <ul>
+                  {people.map((person, i) => (
+                    <li key={i}>{person.name}</li>
+                  ))}
+                </ul>
+              </>
+            );
+          }}
         </Await>
       </Suspense>
     </div>
